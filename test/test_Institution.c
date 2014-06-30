@@ -7,36 +7,67 @@ void setUp(void){}
 
 void tearDown(void){}
 
-void test_LinkedList_exploration(void)
+void test_Institution_reverse_exploration(void)
 {
 	int result;
-	Institution UTAR = 	{.name = "UTAR",
-						 .address = "Setapak",
-						 .yearEstablished = 2003};
+	LinkedList inputList, outputList;
+	Stack stack;
+	Institution UTAR = 	{.name = "UTAR"};
+	Institution USM = {.name = "USM"};
 						 
-	// Institution USM = {.name = "USM",
-					   // .address = "Serdang",
-					   // .postcode = 24567,
-					   // .telephone = 9876543,
-					   // .type = 1,
-					   // .yearEstablished = 1989};
-	
-	// Institution MMU = {.name = "MMU",
-					   // .address = "Cheras",
-					   // .postcode = 51200,
-					   // .telephone = 4567891,
-					   // .type = 1,
-					   // .yearEstablished = 1978};
-	LinkedList list;
-	
-	List_addTail_Expect(&list, &UTAR);
-	TEST_ASSERT_EQUAL_STRING("UTAR", UTAR.name);
-	// List_addTail_Expect(&list, &USM);
-	// List_addTail_Expect(&list, &MMU);
-	
-	
-	
+	Stack_create_ExpectAndReturn(&stack);
 
-
+	List_removeHead_ExpectAndReturn(&inputList, &UTAR);
+	Stack_push_Expect(&stack, &UTAR);
+	List_removeHead_ExpectAndReturn(&inputList, &USM);
+	Stack_push_Expect(&stack, &USM);
 	
+	
+	List_removeHead_ExpectAndReturn(&inputList, NULL);
+	
+	Stack_pop_ExpectAndReturn(&stack, &USM);
+	List_addTail_Expect(&outputList, &USM);
+	Stack_pop_ExpectAndReturn(&stack, &UTAR);
+	List_addTail_Expect(&outputList, &UTAR);
+	
+	Stack_pop_ExpectAndReturn(&stack, NULL);
+	
+	Institution_reverse(&inputList, &outputList);
+}
+
+void xtest_Institution_reverse_given_UTAR_should_be_able_to_push_UTAR_in(void)
+{
+	LinkedList inputList, outputList;
+	Stack stack;
+	Institution UTAR = 	{.name = "UTAR"};
+
+	Stack_create_ExpectAndReturn(&stack);
+
+	List_removeHead_ExpectAndReturn(&inputList, &UTAR);
+	Stack_push_Expect(&stack, &UTAR);
+	
+	List_removeHead_ExpectAndReturn(&inputList, NULL);
+	
+	Institution_reverse(&inputList, &outputList);
+}
+
+void test_Institution_reverse_after_UTAR_is_pushed_should_be_able_to_pop_UTAR_out(void)
+{
+	LinkedList inputList, outputList;
+	Stack stack;
+	Institution UTAR = 	{.name = "UTAR"};
+
+	Stack_create_ExpectAndReturn(&stack);
+
+	List_removeHead_ExpectAndReturn(&inputList, &UTAR);
+	Stack_push_Expect(&stack, &UTAR);
+	
+	List_removeHead_ExpectAndReturn(&inputList, NULL);
+	
+	Stack_pop_ExpectAndReturn(&stack, &UTAR);
+	List_addTail_Expect(&outputList, &UTAR);
+	
+	Stack_pop_ExpectAndReturn(&stack, NULL);
+	
+	Institution_reverse(&inputList, &outputList);
 }
