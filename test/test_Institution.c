@@ -1,5 +1,6 @@
 #include "unity.h"
 #include "Institution.h"
+#include "Compare.h"
 #include "mock_LinkedList.h"
 #include "mock_Stack.h"
 
@@ -51,7 +52,7 @@ void xtest_Institution_reverse_given_UTAR_should_be_able_to_push_UTAR_in(void)
 	Institution_reverse(&inputList, &outputList);
 }
 
-void test_Institution_reverse_after_UTAR_is_pushed_should_be_able_to_pop_UTAR_out(void)
+void xtest_Institution_reverse_after_UTAR_is_pushed_should_be_able_to_pop_UTAR_out(void)
 {
 	LinkedList inputList, outputList;
 	Stack stack;
@@ -71,3 +72,16 @@ void test_Institution_reverse_after_UTAR_is_pushed_should_be_able_to_pop_UTAR_ou
 	
 	Institution_reverse(&inputList, &outputList);
 }
+
+void test_Institution_select_should_select_UTAR_out(void)
+{
+	LinkedList inputList, outputList;
+	Institution UTAR = {.name = "UTAR",
+						.type = 1};
+	
+	List_removeHead_ExpectAndReturn(&inputList, &UTAR);
+	List_addTail_Expect(&outputList, &UTAR);
+	
+	Institution_select(&inputList, &outputList);
+}
+	

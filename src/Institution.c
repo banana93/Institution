@@ -7,22 +7,8 @@
 int Institution_reverse(LinkedList *inputList, LinkedList *outputList)
 {
 	Institution *institute;
-	LinkedList *list;
 	Stack *stack = Stack_create();
-	
-	
-	
-	// institute = List_removeHead(inputList);
-	// printf("Name1 : %s \n", institute->name);
-	// Stack_push(stack, institute);
-	
-	// institute = List_removeHead(inputList);
-	// printf("Name2 : %s \n", institute->name);
-	// Stack_push(stack, institute);
-	
-	// institute = List_removeHead(inputList);
-	// printf("Address : %p \n", institute);
-	
+
 	do
 	{
 		institute = List_removeHead(inputList);
@@ -35,16 +21,7 @@ int Institution_reverse(LinkedList *inputList, LinkedList *outputList)
 			printf("Address : %p \n", institute);
 			
 	}while(institute != NULL);
-	
-	
-	// institute = Stack_pop(stack);
-	// printf("Name : %s \n", institute->name);
-	// List_addTail(outputList, institute);
-	
-	// institute = Stack_pop(stack);
-	// printf("Name : %s \n", institute->name);
-	// List_addTail(outputList, institute);
-	
+
 	do
 	{
 		institute = Stack_pop(stack);
@@ -57,6 +34,20 @@ int Institution_reverse(LinkedList *inputList, LinkedList *outputList)
 			printf("Address : %p \n", institute);
 			
 	}while(institute != NULL);
-		
+}
 
+int Institution_select(LinkedList *inputList, LinkedList *outputList, void *criterion, int (*compare)(void *, void *))
+{
+	Institution *institute;
+	int result;
+	
+	institute = List_removeHead(inputList);
+	printf("Name: %s \n", institute->name);
+	printf("Type: %d \n", institute->type);
+	
+	result = compare();
+	printf("result : %d \n", result);
+	if(result == 1)
+		List_addTail(outputList, institute);
+	
 }
